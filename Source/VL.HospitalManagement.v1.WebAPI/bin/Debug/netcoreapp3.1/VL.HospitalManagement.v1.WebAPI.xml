@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VL.HospitalManagement.v1.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.ApplicationBuilderExtensions.UseStaticFilesWithCacheControl(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Uses the static files middleware to serve static files. Also adds the Cache-Control and Pragma HTTP
+            headers. The cache duration is controlled from configuration.
+            See http://andrewlock.net/adding-cache-control-headers-to-static-files-in-asp-net-core/.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.ApplicationBuilderExtensions.UseCustomSerilogRequestLogging(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Uses custom serilog request logging. Adds additional properties to each log.
+            See https://github.com/serilog/serilog-aspnetcore.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.Controllers.PatientsController.CalcualtePatientGroups(VL.HospitalManagement.v1.WebAPI.Commands.ICalculatePatientGroupsCommand,VL.HospitalManagement.v1.WebAPI.ViewModels.PatientGroupsRequest,System.Threading.CancellationToken)">
+            <summary>
+            Returns a response body with no of groups.
+            </summary>
+            <param name="command">The action command.</param>
+            <param name="car">The car to create.</param>
+            <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
+            <returns>A 201 Created response containing the newly created car or a 400 Bad Request if the car is
+            invalid.</returns>
+        </member>
+        <member name="T:VL.HospitalManagement.v1.WebAPI.CustomServiceCollectionExtensions">
+            <summary>
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> extension methods which extend ASP.NET Core services.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.CustomServiceCollectionExtensions.AddCustomCaching(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures caching for the application. Registers the <see cref="T:Microsoft.Extensions.Caching.Distributed.IDistributedCache"/> and
+            <see cref="T:Microsoft.Extensions.Caching.Memory.IMemoryCache"/> types with the services collection or IoC container. The
+            <see cref="T:Microsoft.Extensions.Caching.Distributed.IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
+            cache, which is shared between multiple instances of the application. Use the <see cref="T:Microsoft.Extensions.Caching.Memory.IMemoryCache"/>
+            otherwise.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.CustomServiceCollectionExtensions.AddCustomCors(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
+            https://docs.asp.net/en/latest/security/cors.html
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.CustomServiceCollectionExtensions.AddCustomOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
+            Objects (POCO) and adding <see cref="T:Microsoft.Extensions.Options.IOptions`1"/> objects to the services collection.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.CustomServiceCollectionExtensions.AddCustomResponseCompression(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
+            requests by default to avoid the BREACH security vulnerability.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.CustomServiceCollectionExtensions.AddCustomRouting(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add custom routing settings which determines how URL's are generated.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.CustomServiceCollectionExtensions.AddCustomStrictTransportSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the Strict-Transport-Security HTTP header to responses. This HTTP header is only relevant if you are
+            using TLS. It ensures that content is loaded over HTTPS and refuses to connect in case of certificate
+            errors and warnings.
+            See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security and
+            http://www.troyhunt.com/2015/06/understanding-http-strict-transport.html
+            Note: Including subdomains and a minimum maxage of 18 weeks is required for preloading.
+            Note: You can refer to the following article to clear the HSTS cache in your browser:
+            http://classically.me/blogs/how-clear-hsts-settings-major-browsers
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.CustomServiceCollectionExtensions.AddCustomSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds Swagger services and configures the Swagger services.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.MvcBuilderExtensions.AddCustomJsonOptions(Microsoft.Extensions.DependencyInjection.IMvcBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Adds customized JSON serializer settings.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.MvcBuilderExtensions.GetJsonPatchInputFormatter">
+            <summary>
+            Gets the JSON patch input formatter. The <see cref="T:Microsoft.AspNetCore.JsonPatch.JsonPatchDocument`1"/> does not support the new
+            System.Text.Json API's for de-serialization. You must use Newtonsoft.Json instead. See
+            https://docs.microsoft.com/en-us/aspnet/core/web-api/jsonpatch?view=aspnetcore-3.0#jsonpatch-addnewtonsoftjson-and-systemtextjson
+            </summary>
+            <returns>The JSON patch input formatter using Newtonsoft.Json.</returns>
+        </member>
+        <member name="T:VL.HospitalManagement.v1.WebAPI.OperationFilters.ApiVersionOperationFilter">
+            <summary>
+            An Open API operation filter used to document the implicit API version parameter.
+            </summary>
+            <remarks>This <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter"/> is only required due to bugs in the <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator"/>.
+            Once they are fixed and published, this class can be removed. See:
+            - https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/412
+            - https://github.com/domaindrivendev/Swashbuckle.AspNetCore/pull/413</remarks>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.OperationFilters.ApiVersionOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <inheritdoc/>
+        </member>
+        <member name="T:VL.HospitalManagement.v1.WebAPI.Options.ApplicationOptions">
+            <summary>
+            All options for the application.
+            </summary>
+        </member>
+        <member name="T:VL.HospitalManagement.v1.WebAPI.Options.CacheProfileOptions">
+            <summary>
+            The caching options for the application.
+            </summary>
+        </member>
+        <member name="T:VL.HospitalManagement.v1.WebAPI.Options.CompressionOptions">
+            <summary>
+            The dynamic response compression options for the application.
+            </summary>
+        </member>
+        <member name="P:VL.HospitalManagement.v1.WebAPI.Options.CompressionOptions.MimeTypes">
+            <summary>
+            Gets or sets a list of MIME types to be compressed in addition to the default set used by ASP.NET Core.
+            </summary>
+        </member>
+        <member name="T:VL.HospitalManagement.v1.WebAPI.ProjectServiceCollectionExtensions">
+            <summary>
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> extension methods add project services.
+            </summary>
+            <remarks>
+            AddSingleton - Only one instance is ever created and returned.
+            AddScoped - A new instance is created and returned for each request/response cycle.
+            AddTransient - A new instance is created and returned each time.
+            </remarks>
+        </member>
+        <member name="T:VL.HospitalManagement.v1.WebAPI.Services.ClockService">
+            <summary>
+            Retrieves the current date and/or time. Helps with unit testing by letting you mock the system clock.
+            </summary>
+        </member>
+        <member name="T:VL.HospitalManagement.v1.WebAPI.Services.IClockService">
+            <summary>
+            Retrieves the current date and/or time. Helps with unit testing by letting you mock the system clock.
+            </summary>
+        </member>
+        <member name="T:VL.HospitalManagement.v1.WebAPI.Startup">
+            <summary>
+            The main start-up class for the application.
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VL.HospitalManagement.v1.WebAPI.Startup"/> class.
+            </summary>
+            <param name="configuration">The application configuration, where key value pair settings are stored. See
+            http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
+            <param name="webHostEnvironment">The environment the application is running under. This can be Development,
+            Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services to add to the ASP.NET Core Injection of Control (IoC) container. This method gets
+            called by the ASP.NET runtime. See
+            http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
+            </summary>
+        </member>
+        <member name="M:VL.HospitalManagement.v1.WebAPI.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
+            called by the ASP.NET runtime.
+            </summary>
+        </member>
+    </members>
+</doc>

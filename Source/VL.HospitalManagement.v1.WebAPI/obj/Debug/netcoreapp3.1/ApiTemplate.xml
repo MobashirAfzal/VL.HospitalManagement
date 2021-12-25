@@ -1,0 +1,408 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiTemplate</name>
+    </assembly>
+    <members>
+        <member name="M:ApiTemplate.ApplicationBuilderExtensions.UseStaticFilesWithCacheControl(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Uses the static files middleware to serve static files. Also adds the Cache-Control and Pragma HTTP
+            headers. The cache duration is controlled from configuration.
+            See http://andrewlock.net/adding-cache-control-headers-to-static-files-in-asp-net-core/.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.ApplicationBuilderExtensions.UseCustomSerilogRequestLogging(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Uses custom serilog request logging. Adds additional properties to each log.
+            See https://github.com/serilog/serilog-aspnetcore.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.Controllers.CarsController.Options">
+            <summary>
+            Returns an Allow HTTP header with the allowed HTTP methods.
+            </summary>
+            <returns>A 200 OK response.</returns>
+        </member>
+        <member name="M:ApiTemplate.Controllers.CarsController.Options(System.Int32)">
+            <summary>
+            Returns an Allow HTTP header with the allowed HTTP methods for a car with the specified unique identifier.
+            </summary>
+            <param name="carId">The cars unique identifier.</param>
+            <returns>A 200 OK response.</returns>
+        </member>
+        <member name="M:ApiTemplate.Controllers.CarsController.DeleteAsync(ApiTemplate.Commands.IDeleteCarCommand,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Deletes the car with the specified unique identifier.
+            </summary>
+            <param name="command">The action command.</param>
+            <param name="carId">The cars unique identifier.</param>
+            <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
+            <returns>A 204 No Content response if the car was deleted or a 404 Not Found if a car with the specified
+            unique identifier was not found.</returns>
+        </member>
+        <member name="M:ApiTemplate.Controllers.CarsController.GetAsync(ApiTemplate.Commands.IGetCarCommand,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Gets the car with the specified unique identifier.
+            </summary>
+            <param name="command">The action command.</param>
+            <param name="carId">The cars unique identifier.</param>
+            <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
+            <returns>A 200 OK response containing the car or a 404 Not Found if a car with the specified unique
+            identifier was not found.</returns>
+        </member>
+        <member name="M:ApiTemplate.Controllers.CarsController.GetPageAsync(ApiTemplate.Commands.IGetCarPageCommand,ApiTemplate.ViewModels.PageOptions,System.Threading.CancellationToken)">
+            <summary>
+            Gets a collection of cars using the specified page number and number of items per page.
+            </summary>
+            <param name="command">The action command.</param>
+            <param name="pageOptions">The page options.</param>
+            <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
+            <returns>A 200 OK response containing a collection of cars, a 400 Bad Request if the page request
+            parameters are invalid or a 404 Not Found if a page with the specified page number was not found.
+            </returns>
+        </member>
+        <member name="M:ApiTemplate.Controllers.CarsController.PatchAsync(ApiTemplate.Commands.IPatchCarCommand,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{ApiTemplate.ViewModels.SaveCar},System.Threading.CancellationToken)">
+            <summary>
+            Patches the car with the specified unique identifier.
+            </summary>
+            <param name="command">The action command.</param>
+            <param name="carId">The cars unique identifier.</param>
+            <param name="patch">The patch document. See http://jsonpatch.com.</param>
+            <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
+            <returns>A 200 OK if the car was patched, a 400 Bad Request if the patch was invalid or a 404 Not Found
+            if a car with the specified unique identifier was not found.</returns>
+        </member>
+        <member name="M:ApiTemplate.Controllers.CarsController.PostAsync(ApiTemplate.Commands.IPostCarCommand,ApiTemplate.ViewModels.SaveCar,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new car.
+            </summary>
+            <param name="command">The action command.</param>
+            <param name="car">The car to create.</param>
+            <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
+            <returns>A 201 Created response containing the newly created car or a 400 Bad Request if the car is
+            invalid.</returns>
+        </member>
+        <member name="M:ApiTemplate.Controllers.CarsController.PutAsync(ApiTemplate.Commands.IPutCarCommand,System.Int32,ApiTemplate.ViewModels.SaveCar,System.Threading.CancellationToken)">
+            <summary>
+            Updates an existing car with the specified unique identifier.
+            </summary>
+            <param name="command">The action command.</param>
+            <param name="carId">The car identifier.</param>
+            <param name="car">The car to update.</param>
+            <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
+            <returns>A 200 OK response containing the newly updated car, a 400 Bad Request if the car is invalid or a
+            or a 404 Not Found if a car with the specified unique identifier was not found.</returns>
+        </member>
+        <member name="T:ApiTemplate.CustomServiceCollectionExtensions">
+            <summary>
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> extension methods which extend ASP.NET Core services.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.CustomServiceCollectionExtensions.AddCustomCaching(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures caching for the application. Registers the <see cref="T:Microsoft.Extensions.Caching.Distributed.IDistributedCache"/> and
+            <see cref="T:Microsoft.Extensions.Caching.Memory.IMemoryCache"/> types with the services collection or IoC container. The
+            <see cref="T:Microsoft.Extensions.Caching.Distributed.IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
+            cache, which is shared between multiple instances of the application. Use the <see cref="T:Microsoft.Extensions.Caching.Memory.IMemoryCache"/>
+            otherwise.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.CustomServiceCollectionExtensions.AddCustomCors(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
+            https://docs.asp.net/en/latest/security/cors.html
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.CustomServiceCollectionExtensions.AddCustomOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
+            Objects (POCO) and adding <see cref="T:Microsoft.Extensions.Options.IOptions`1"/> objects to the services collection.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.CustomServiceCollectionExtensions.AddCustomResponseCompression(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
+            requests by default to avoid the BREACH security vulnerability.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.CustomServiceCollectionExtensions.AddCustomRouting(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add custom routing settings which determines how URL's are generated.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.CustomServiceCollectionExtensions.AddCustomStrictTransportSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the Strict-Transport-Security HTTP header to responses. This HTTP header is only relevant if you are
+            using TLS. It ensures that content is loaded over HTTPS and refuses to connect in case of certificate
+            errors and warnings.
+            See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security and
+            http://www.troyhunt.com/2015/06/understanding-http-strict-transport.html
+            Note: Including subdomains and a minimum maxage of 18 weeks is required for preloading.
+            Note: You can refer to the following article to clear the HSTS cache in your browser:
+            http://classically.me/blogs/how-clear-hsts-settings-major-browsers
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.CustomServiceCollectionExtensions.AddCustomSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds Swagger services and configures the Swagger services.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.MvcBuilderExtensions.AddCustomJsonOptions(Microsoft.Extensions.DependencyInjection.IMvcBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Adds customized JSON serializer settings.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.MvcBuilderExtensions.GetJsonPatchInputFormatter">
+            <summary>
+            Gets the JSON patch input formatter. The <see cref="T:Microsoft.AspNetCore.JsonPatch.JsonPatchDocument`1"/> does not support the new
+            System.Text.Json API's for de-serialization. You must use Newtonsoft.Json instead. See
+            https://docs.microsoft.com/en-us/aspnet/core/web-api/jsonpatch?view=aspnetcore-3.0#jsonpatch-addnewtonsoftjson-and-systemtextjson
+            </summary>
+            <returns>The JSON patch input formatter using Newtonsoft.Json.</returns>
+        </member>
+        <member name="T:ApiTemplate.OperationFilters.ApiVersionOperationFilter">
+            <summary>
+            An Open API operation filter used to document the implicit API version parameter.
+            </summary>
+            <remarks>This <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter"/> is only required due to bugs in the <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator"/>.
+            Once they are fixed and published, this class can be removed. See:
+            - https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/412
+            - https://github.com/domaindrivendev/Swashbuckle.AspNetCore/pull/413</remarks>
+        </member>
+        <member name="M:ApiTemplate.OperationFilters.ApiVersionOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ApiTemplate.Options.ApplicationOptions">
+            <summary>
+            All options for the application.
+            </summary>
+        </member>
+        <member name="T:ApiTemplate.Options.CacheProfileOptions">
+            <summary>
+            The caching options for the application.
+            </summary>
+        </member>
+        <member name="T:ApiTemplate.Options.CompressionOptions">
+            <summary>
+            The dynamic response compression options for the application.
+            </summary>
+        </member>
+        <member name="P:ApiTemplate.Options.CompressionOptions.MimeTypes">
+            <summary>
+            Gets or sets a list of MIME types to be compressed in addition to the default set used by ASP.NET Core.
+            </summary>
+        </member>
+        <member name="T:ApiTemplate.ProjectServiceCollectionExtensions">
+            <summary>
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> extension methods add project services.
+            </summary>
+            <remarks>
+            AddSingleton - Only one instance is ever created and returned.
+            AddScoped - A new instance is created and returned for each request/response cycle.
+            AddTransient - A new instance is created and returned each time.
+            </remarks>
+        </member>
+        <member name="T:ApiTemplate.Services.ClockService">
+            <summary>
+            Retrieves the current date and/or time. Helps with unit testing by letting you mock the system clock.
+            </summary>
+        </member>
+        <member name="T:ApiTemplate.Services.IClockService">
+            <summary>
+            Retrieves the current date and/or time. Helps with unit testing by letting you mock the system clock.
+            </summary>
+        </member>
+        <member name="T:ApiTemplate.Startup">
+            <summary>
+            The main start-up class for the application.
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApiTemplate.Startup"/> class.
+            </summary>
+            <param name="configuration">The application configuration, where key value pair settings are stored. See
+            http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
+            <param name="webHostEnvironment">The environment the application is running under. This can be Development,
+            Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
+        </member>
+        <member name="M:ApiTemplate.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services to add to the ASP.NET Core Injection of Control (IoC) container. This method gets
+            called by the ASP.NET runtime. See
+            http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
+            </summary>
+        </member>
+        <member name="M:ApiTemplate.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
+            called by the ASP.NET runtime.
+            </summary>
+        </member>
+        <member name="T:ApiTemplate.ViewModels.Car">
+            <summary>
+            A make and model of car.
+            </summary>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.Car.CarId">
+            <summary>
+            The cars unique identifier.
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.Car.Cylinders">
+            <summary>
+            The number of cylinders in the cars engine.
+            </summary>
+            <example>6</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.Car.Make">
+            <summary>
+            The make of the car.
+            </summary>
+            <example>Honda</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.Car.Model">
+            <summary>
+            The model of the car.
+            </summary>
+            <example>Civic</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.Car.Url">
+            <summary>
+            The URL used to retrieve the resource conforming to REST'ful JSON http://restfuljson.org/.
+            </summary>
+            <example>/cars/1</example>
+        </member>
+        <member name="T:ApiTemplate.ViewModels.Connection`1">
+            <summary>
+            A paged collection of items.
+            </summary>
+            <typeparam name="T">The type of the items.</typeparam>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.Connection`1.TotalCount">
+            <summary>
+            Gets or sets the total count of items.
+            </summary>
+            <example>100</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.Connection`1.PageInfo">
+            <summary>
+            Gets or sets the page information.
+            </summary>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.Connection`1.Items">
+            <summary>
+            Gets or sets the items.
+            </summary>
+        </member>
+        <member name="T:ApiTemplate.ViewModels.PageInfo">
+            <summary>
+            Holds metadata about a page of items.
+            </summary>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageInfo.Count">
+            <summary>
+            Gets or sets the count of items.
+            </summary>
+            <example>10</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageInfo.HasNextPage">
+            <summary>
+            Gets or sets a value indicating whether this instance has a next page.
+            </summary>
+            <example>true</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageInfo.HasPreviousPage">
+            <summary>
+            Gets or sets a value indicating whether this instance has a previous page.
+            </summary>
+            <example>false</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageInfo.NextPageUrl">
+            <summary>
+            Gets or sets the next page URL.
+            </summary>
+            <example>/cars?First=10&amp;After=MjAxOS0xMC0yNlQxNDozNDo1MC4xOTgwNzY2KzAwOjAw</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageInfo.PreviousPageUrl">
+            <summary>
+            Gets or sets the previous page URL.
+            </summary>
+            <example>/cars?First=10&amp;Before=MjAxOS0xMC0yNlQxNDozNDo1MC4xOTgwNzY2KzAwOjAw</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageInfo.FirstPageUrl">
+            <summary>
+            Gets or sets the URL to the first page.
+            </summary>
+            <example>/cars?First=10</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageInfo.LastPageUrl">
+            <summary>
+            Gets or sets the URL to the last page.
+            </summary>
+            <example>/cars?Last=10</example>
+        </member>
+        <member name="M:ApiTemplate.ViewModels.PageInfo.ToLinkHttpHeaderValue">
+            <summary>
+            Gets the Link HTTP header value to add URL's to next, previous, first and last pages.
+            See https://tools.ietf.org/html/rfc5988#page-6
+            There is a standard list of link relation types e.g. next, previous, first and last.
+            See https://www.iana.org/assignments/link-relations/link-relations.xhtml
+            </summary>
+            <returns>The Link HTTP header value.</returns>
+        </member>
+        <member name="T:ApiTemplate.ViewModels.PageOptions">
+            <summary>
+            The options used to request a page.
+            </summary>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageOptions.First">
+            <summary>
+            Gets or sets the number of items to retrieve from the beginning.
+            </summary>
+            <example>10</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageOptions.Last">
+            <summary>
+            Gets or sets the number of items to retrieve from the end.
+            </summary>
+            <example></example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageOptions.After">
+            <summary>
+            Gets or sets the cursor of the item after which items are requested.
+            </summary>
+            <example></example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.PageOptions.Before">
+            <summary>
+            Gets or sets the cursor of the item before which items are requested
+            </summary>
+            <example></example>
+        </member>
+        <member name="T:ApiTemplate.ViewModels.SaveCar">
+            <summary>
+            A make and model of car.
+            </summary>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.SaveCar.Cylinders">
+            <summary>
+            The number of cylinders in the cars engine.
+            </summary>
+            <example>6</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.SaveCar.Make">
+            <summary>
+            The make of the car.
+            </summary>
+            <example>Honda</example>
+        </member>
+        <member name="P:ApiTemplate.ViewModels.SaveCar.Model">
+            <summary>
+            The model of the car.
+            </summary>
+            <example>Civic</example>
+        </member>
+    </members>
+</doc>
