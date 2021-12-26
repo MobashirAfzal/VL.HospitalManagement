@@ -17,15 +17,14 @@
             See https://github.com/serilog/serilog-aspnetcore.
             </summary>
         </member>
-        <member name="M:VL.HospitalManagement.v1.WebAPI.Controllers.PatientsController.CalcualtePatientGroups(VL.HospitalManagement.v1.WebAPI.Commands.ICalculatePatientGroupsCommand,VL.HospitalManagement.v1.WebAPI.ViewModels.PatientGroupsRequest,System.Threading.CancellationToken)">
+        <member name="M:VL.HospitalManagement.v1.WebAPI.Controllers.PatientsController.CalcualtePatientGroups(VL.HospitalManagement.v1.WebAPI.Commands.ICalculatePatientGroupsCommand,VL.HospitalManagement.v1.WebAPI.ViewModels.CalculatePatientGroupsRequest,System.Threading.CancellationToken)">
             <summary>
             Returns a response body with no of groups.
             </summary>
             <param name="command">The action command.</param>
-            <param name="car">The car to create.</param>
             <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
-            <returns>A 201 Created response containing the newly created car or a 400 Bad Request if the car is
-            invalid.</returns>
+            <returns>A 200 response containing containing the total no of patient groups.
+            </returns>
         </member>
         <member name="T:VL.HospitalManagement.v1.WebAPI.CustomServiceCollectionExtensions">
             <summary>

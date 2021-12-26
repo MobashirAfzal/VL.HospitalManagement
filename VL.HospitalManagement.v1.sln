@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VL.HospitalManagement.v1.WebAPI", "Source\VL.HospitalManagement.v1.WebAPI\VL.HospitalManagement.v1.WebAPI.csproj", "{65C2B443-6BA3-4C9D-AB85-B93561BCD71D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VL.HospitalManagement.v1.UnitTests", "Tests\VL.HospitalManagement.v1.UnitTests\VL.HospitalManagement.v1.UnitTests.csproj", "{CB2483B3-18B2-4A8D-BE33-F4EB8BB23F14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{65C2B443-6BA3-4C9D-AB85-B93561BCD71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C2B443-6BA3-4C9D-AB85-B93561BCD71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C2B443-6BA3-4C9D-AB85-B93561BCD71D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB2483B3-18B2-4A8D-BE33-F4EB8BB23F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB2483B3-18B2-4A8D-BE33-F4EB8BB23F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB2483B3-18B2-4A8D-BE33-F4EB8BB23F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB2483B3-18B2-4A8D-BE33-F4EB8BB23F14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{65C2B443-6BA3-4C9D-AB85-B93561BCD71D} = {9FC5212D-733E-471D-9933-B5ED8FBD5A7C}
+		{CB2483B3-18B2-4A8D-BE33-F4EB8BB23F14} = {65859A79-0E87-4B6F-B105-F17EB6994A86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16E1A891-7F59-4326-87E1-5353F346C116}

@@ -6,7 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Threading;
 
-    public interface ICalculatePatientGroupsCommand : IAsyncCommand<PatientGroupsRequest>
+    public interface ICalculatePatientGroupsCommand : IAsyncCommand<CalculatePatientGroupsRequest>
     {
         
     }

@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class PatientGroupsRequest
+    public class CalculatePatientGroupsRequest
     {
         [Required]
         public List<List<int>> matrix { get; set; }

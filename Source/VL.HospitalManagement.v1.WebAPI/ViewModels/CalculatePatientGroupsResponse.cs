@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace VL.HospitalManagement.v1.WebAPI.ViewModels
 {
-    public class PatientGroupsResponse
+    public class CalculatePatientGroupsResponse
     {
-        public int numberOfGroups { get; set; }
+        public int NumberOfGroups { get; set; }
     }
 }

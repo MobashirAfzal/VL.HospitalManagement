@@ -7,6 +7,7 @@
     using VL.HospitalManagement.v1.WebAPI.ViewModels;
     using Boxed.Mapping;
     using Microsoft.AspNetCore.Mvc;
+    using System;
 
     public class CalculatePatientsGroupCommand : ICalculatePatientGroupsCommand
     {
@@ -18,9 +19,18 @@
             
         }
 
-        public Task<IActionResult> ExecuteAsync(PatientGroupsRequest parameter, CancellationToken cancellationToken = default)
+        public Task<IActionResult> ExecuteAsync(CalculatePatientGroupsRequest request, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+
+            int numOfGroups = Helpers.BussinessLogics.Patients.CalculateNumberOfGroups(request.matrix);
+            var calculatePatientGroupsResponseBody = new CalculatePatientGroupsResponse
+            {
+                NumberOfGroups = numOfGroups
+            };
+
+            throw new Exception();
+
+
         }
 
         

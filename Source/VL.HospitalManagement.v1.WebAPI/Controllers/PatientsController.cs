@@ -26,21 +26,22 @@
         /// Returns a response body with no of groups.
         /// </summary>
         /// <param name="command">The action command.</param>
-        /// <param name="car">The car to create.</param>
+        /// <param name="calculatePatientGroupsRequest">PatientGroups</param>
         /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
-        /// <returns>A 201 Created response containing the newly created car or a 400 Bad Request if the car is
-        /// invalid.</returns>
+        /// <returns>A 200 response containing containing the total no of patient groups.
+        /// </returns>
         [HttpPost("patient-groups/calculate")]
 #if Swagger
-        [SwaggerResponse(StatusCodes.Status200OK, "The car was created.", typeof(PatientGroupsResponse))]
+        [SwaggerResponse(StatusCodes.Status200OK, "The car was created.", typeof(CalculatePatientGroupsResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.", typeof(ProblemDetails))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, "The car is invalid.", typeof(ProblemDetails))]
         [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
         [SwaggerResponse(StatusCodes.Status415UnsupportedMediaType, "The MIME type in the Content-Type HTTP header is unsupported.", typeof(ProblemDetails))]
 #endif
         public Task<IActionResult> CalcualtePatientGroups(
             [FromServices] ICalculatePatientGroupsCommand command,
-            [FromBody] PatientGroupsRequest car,
-            CancellationToken cancellationToken) => command.ExecuteAsync(car, cancellationToken);
+            [FromBody] CalculatePatientGroupsRequest calculatePatientGroupsRequest,
+            CancellationToken cancellationToken) => command.ExecuteAsync(calculatePatientGroupsRequest, cancellationToken);
 
 
 
