@@ -22,6 +22,7 @@
             Returns a response body with no of groups.
             </summary>
             <param name="command">The action command.</param>
+            <param name="calculatePatientGroupsRequest">PatientGroups</param>
             <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
             <returns>A 200 response containing containing the total no of patient groups.
             </returns>

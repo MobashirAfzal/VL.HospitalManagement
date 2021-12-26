@@ -6,14 +6,21 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    //public class CalculatePatientGroupsRequest
+    //{
+    //    [Required]
+    //    public List<List<int>> matrix { get; set; }
+    //}
+
+
     public class CalculatePatientGroupsRequest
     {
         [Required]
-        public List<List<int>> matrix { get; set; }
+        public int[][] matrix { get; set; }
     }
 
 
-    
+
 
 }
 

@@ -8,31 +8,40 @@
     using Boxed.Mapping;
     using Microsoft.AspNetCore.Mvc;
     using System;
+    using Boxed.AspNetCore;
 
     public class CalculatePatientsGroupCommand : ICalculatePatientGroupsCommand
     {
-        
 
-        public CalculatePatientsGroupCommand()
-            
+
+
+
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task<IActionResult> ExecuteAsync(CalculatePatientGroupsRequest request, CancellationToken cancellationToken)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            
-        }
 
-        public Task<IActionResult> ExecuteAsync(CalculatePatientGroupsRequest request, CancellationToken cancellationToken = default)
-        {
 
-            int numOfGroups = Helpers.BussinessLogics.Patients.CalculateNumberOfGroups(request.matrix);
+
+
+            //Please refer the Helpers for implementation.
+
+            int numOfGroups = Helpers.BussinessLogics.PatientsHelper.CalculateNumberOfGroups(request.matrix);
             var calculatePatientGroupsResponseBody = new CalculatePatientGroupsResponse
             {
                 NumberOfGroups = numOfGroups
             };
 
-            throw new Exception();
+            
+
+            return new OkObjectResult(calculatePatientGroupsResponseBody);
+
+
 
 
         }
 
-        
+
     }
 }
