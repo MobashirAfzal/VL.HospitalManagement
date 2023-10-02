@@ -91,7 +91,7 @@ namespace VL.HospitalManagement.v1.WebAPI
                 .AddKeyPerFile(Path.Combine(Directory.GetCurrentDirectory(), "configuration"), optional: true)
                 // This reads the configuration keys from the secret store. This allows you to store connection strings
                 // and other sensitive settings, so you don't have to check them into your source control provider.
-                // Only use this in Development, it is not intended for Production use. See
+                // Only use this in Development, it is not intended for Production use.. See
                 // http://docs.asp.net/en/latest/security/app-secrets.html
                 .AddIf(
                     hostEnvironment.IsDevelopment() && !string.IsNullOrEmpty(hostEnvironment.ApplicationName),
